@@ -12,11 +12,11 @@ class MensagemValidator
         }
 
         if(isset($data['destinatario'])) {
-            $destinatario = \App\Funcionario::where('nome', 'like', $data['destinatario'])->first();
+            $destinatario = \App\Models\Funcionario::where('nome', 'like', $data['destinatario'])->first();
             if($destinatario != null)
                 $data['destinatario_id'] = $destinatario->id;
         }
-		$validator = \Validator::make($data, \App\Mensagem::$rules, \App\Mensagem::$messages);
+		$validator = \Validator::make($data, \App\Models\Mensagem::$rules, \App\Models\Mensagem::$messages);
 
 		if(isset($data['funcionario_id']) && isset($data['destinatario_id']) && $data['funcionario_id'] == $data['destinatario_id'])
 			$validator->errors()->add('destinatario_id', 'O funcionario não pode enviar uma mensagem para si mesmo' );

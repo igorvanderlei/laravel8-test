@@ -71,6 +71,7 @@ class CadastrarFuncionarioTest extends TestCase
             ->assertStatus(200)
             ->assertSee('Funcionario criado');
     }
+
     public function testFuncionarioLogadoRHEnviaFormDadosIncompletos() {
         $funcionarioRH = Funcionario::where('departamento_id', '=', '1')
             ->first();

@@ -14,8 +14,10 @@ class FuncionarioValidatorTest extends TestCase
    public function testFuncionarioSemNome() {
         $this->expectException(ValidationException::class);
         $funcionario = Funcionario::factory()->make(['nome' => '']);
-        //$funcionario->nome = "";
-        FuncionarioValidator::validate($funcionario->toArray());
+        $dados = $funcionario->toArray();
+        $dados['password'] = 'password';
+        $dados['password_confirmation'] = 'password';
+        FuncionarioValidator::validate($dados);
    }
 
     public function testFuncionarioSemDepartamento() {

@@ -31,17 +31,19 @@ class MensagemValidatorTest extends TestCase
         $this->assertEquals($qt1 + 1, $qt2);
     }
 
-    /*    public function testEnviarMensagemCaixaSaidaRemetente() {
-        $f1 = \App\Funcionario::find(1);
-        $f2 = \App\Funcionario::find(2);
+        public function testMensagemRemetenteIgualDestinatario()
+        {
+        $this->expectException(\App\Validator\ValidationException::class);
+            $mensagem = \App\Models\Mensagem::factory()->make();
 
-        $qt1 = $f1->caixaSaida()->count();
-        $mensagem = factory(\App\Mensagem::class)->make();
-        $f1->enviarMensagem($mensagem->titulo, $mensagem->texto, $f2);
-        $qt2 = $f1->caixaSaida()->count();
-        $this->assertEquals($qt1 + 1, $qt2);
+        $mensagem->destinatario_id = $mensagem->funcionario_id;
+        $dados = $mensagem->toArray();
 
-       }
+       
+        \App\Validator\MensagemValidator::validate($dados);
+        }
+
+    /*    
 
 
 

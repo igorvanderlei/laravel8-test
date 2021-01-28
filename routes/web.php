@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CadastrarFuncionario;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\EnviarMensagemController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,9 +19,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+Route::get('/dashboard/{caixa?}', [HomeController::class, 'index'])->name('dashboard');
 
-Route::get('funcionario/create', [CadastrarFuncionario::class, 'prepararCadastro'])->name("funcionario.create");
+Route::get('/funcionario/create', [CadastrarFuncionario::class, 'prepararCadastro'])->name("funcionario.create");
 Route::post('funcionario/create', [CadastrarFuncionario::class, 'cadastrar'])->name("funcionario.create");
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get("/escrever", [EnviarMensagemController::class, 'showForm'])->name('mensagem.create');
+
+Route::post("/enviar", [EnviarMensagemController::class, 'enviar'])->name('mensagem.send');

@@ -20,11 +20,12 @@ class CadastrarFuncionarioTest extends DuskTestCase
 
         $this->browse(function (Browser $browser) use ($funcionarioRH) {
             $browser->visit('/login')
+                ->pause(2000)
                 ->type('nome', $funcionarioRH->nome)
                 ->type('password', 'password')
                 ->pause(2000)
                 ->screenshot('login')
-                ->press('LOGIN')
+                ->press('Login')
                 ->assertPathIs('/dashboard')
                 ->pause(2000)
                 ->screenshot('home')

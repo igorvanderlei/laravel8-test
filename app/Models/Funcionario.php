@@ -25,7 +25,7 @@ class Funcionario  extends Authenticatable
     ];
 
     public function departamento() {
-	return $this->belongsTo('\App\Models\Departamento');
+	    return $this->belongsTo('\App\Models\Departamento');
     }
 
     public function caixaSaida() {
@@ -42,6 +42,10 @@ class Funcionario  extends Authenticatable
 	    $mensagem->texto = $texto;
 	    $mensagem->destinatario()->associate($destinatario);
 	    $this->caixaSaida()->save($mensagem);
+
+        /*$mensagem->funcionario_id = $this->id;
+        $mensagem->destinatario_id = $destinatario_id;
+        $mensagem->save();*/
     }
 
 }

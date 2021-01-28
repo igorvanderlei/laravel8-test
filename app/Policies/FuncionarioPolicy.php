@@ -21,7 +21,21 @@ class FuncionarioPolicy
         //
     }
 
-    public function create() {
-        return Auth::user()->departamento->nome == "RH";
+    public function create( ) {
+        if(Auth::user()->departamento->nome == "RH")
+            return true;
+        else
+            return false;
     }
+
+    public function update(Funcionario $funcionario) {
+        if( Auth::user()->id == $funcionario->id || 
+            Auth::user()->departamento->nome == "RH")
+            return true;
+        else
+            return false;
+
+    }
+
+
 }

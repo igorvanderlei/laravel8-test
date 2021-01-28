@@ -30,11 +30,10 @@ class CadastrarFuncionario extends Controller
     }
 
     public function prepararCadastro() {
-
         $this->authorize("create", \App\Models\Funcionario::class);
 
         $listaDepartamento = \App\Models\Departamento::all();
-        return view ("funcionario.create")->with([
+        return view ("formCadastrarFuncionario")->with([
             "departamentos" => $listaDepartamento]);
     }
 }
